@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: Cloud-Gateway
+  cloud:
+    gateway:
+      routes:
+        - id: job-service
+          uri: http://localhost:2026
+          predicates:
+            - Path=/jobs/**
+        - id: application-service
+          uri: http://localhost:2027
+          predicates:
+            - Path=/applications/**
+
+server:
+  port: 1015
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
